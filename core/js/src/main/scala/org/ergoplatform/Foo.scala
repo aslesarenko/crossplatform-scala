@@ -14,10 +14,11 @@ object Main {
   def main(args: Array[String]): Unit = {
     waitForLoad {
       val appContainer = dom.document.querySelector("#app")
-      appContainer.innerHTML = Bar.a.toString
+      appContainer.innerHTML = ""
       unmount()
       val view = div(
-        h3("IMPORTANT WEBSITE"),
+        h3("Bar.a"),
+        div(Bar.a.toString)
       )
       val rootNode = render(appContainer, view)
       storeUnmount(rootNode)

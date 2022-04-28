@@ -56,7 +56,6 @@ lazy val coreJS = core.js
     .enablePlugins(ScalaJSPlugin)
     .settings(dottySettings)
     .settings(
-//      scalaJSLinkerConfig ~= { _.withModuleKind(ModuleKind.ESModule) },
       scalaJSLinkerConfig ~= { _.withSourceMap(false) },
       scalaJSUseMainModuleInitializer := true,
       libraryDependencies ++= Seq(
