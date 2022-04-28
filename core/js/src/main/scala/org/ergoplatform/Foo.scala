@@ -12,17 +12,18 @@ object Css extends js.Any
 
 object Main {
   def main(args: Array[String]): Unit = {
-    waitForLoad {
-      val appContainer = dom.document.querySelector("#app")
-      appContainer.innerHTML = ""
-      unmount()
-      val view = div(
-        h3("Bar.a"),
-        div(Bar.a.toString)
-      )
-      val rootNode = render(appContainer, view)
-      storeUnmount(rootNode)
-    }
+    println("hellow")
+//    waitForLoad {
+//      val appContainer = dom.document.querySelector("#app")
+//      appContainer.innerHTML = ""
+//      unmount()
+//      val view = div(
+//        h3("Bar.a"),
+//        div(Bar.a.toString)
+//      )
+//      val rootNode = render(appContainer, view)
+//      storeUnmount(rootNode)
+//    }
   }
   def waitForLoad(f: => Any): Unit =
     if (dom.window.asInstanceOf[js.Dynamic].documentLoaded == null)

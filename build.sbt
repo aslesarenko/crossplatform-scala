@@ -32,16 +32,15 @@ lazy val root = project
     )
     .aggregate(
       coreJS,
-      coreJVM,
-      coreNative
+      coreJVM
     )
     .enablePlugins(ScalaJSPlugin)
 
-lazy val core = crossProject(JSPlatform, JVMPlatform, NativePlatform)
+lazy val core = crossProject(JSPlatform, JVMPlatform/*, NativePlatform*/)
     .in(file("core"))
     .settings(stdSettings("core"))
     .settings(crossProjectSettings)
-    .settings(buildInfoSettings("cor"))
+    .settings(buildInfoSettings("org.ergoplatform"))
     .enablePlugins(BuildInfoPlugin)
 
 lazy val coreJVM = core.jvm
@@ -74,10 +73,43 @@ lazy val coreJS = core.js
       }
     )
 
-lazy val coreNative = core.native
-    .settings(nativeSettings)
+//lazy val coreNative = core.native
+//    .settings(nativeSettings)
+//    .settings(
+//      libraryDependencies ++= Seq(
+//        "com.github.lolgab" %%% "native-loop-core" % "0.2.1"
+//      )
+//    )
+
+lazy val coreTests = crossProject(JSPlatform, JVMPlatform)
+    .in(file("core-tests"))
+    .dependsOn(core)
+    .settings(stdSettings("core-tests"))
+    .settings(crossProjectSettings)
+    .settings(buildInfoSettings("org.ergoplatform"))
+    .settings(publish / skip := true)
     .settings(
-      libraryDependencies ++= Seq(
-        "com.github.lolgab" %%% "native-loop-core" % "0.2.1"
-      )
+      Compile / classLoaderLayeringStrategy := ClassLoaderLayeringStrategy.Flat
+    )
+    .settings(libraryDependencies ++= Seq(
+      "org.scalatest" %% "scalatest" % "3.2.11"
+    ))
+    .enablePlugins(BuildInfoPlugin)
+
+lazy val coreTestsJVM = coreTests.jvm
+    .settings(dottySettings)
+    .configure(_.enablePlugins(JCStressPlugin))
+    .settings(replSettings)
+
+lazy val coreTestsJS = coreTests.js
+    .settings(dottySettings)
+    .settings(
+      scalaJSLinkerConfig ~= { _.withSourceMap(false) },
+      scalacOptions ++= {
+        if (scalaVersion.value == Scala3) {
+          List()
+        } else {
+          List("-P:scalajs:nowarnGlobalExecutionContext")
+        }
+      }
     )
