@@ -47,11 +47,23 @@ lazy val core = crossProject(JSPlatform, JVMPlatform, NativePlatform)
 lazy val coreJVM = core.jvm
     .settings(dottySettings)
     .settings(replSettings)
+    .settings(libraryDependencies ++= Seq(
+      "org.bouncycastle" % "bcprov-jdk15on" % "1.64",
+      "org.scorexfoundation" %% "scrypto" % "2.1.10"))
     .settings(mimaSettings(failOnProblem = true))
 
 lazy val coreJS = core.js
+    .enablePlugins(ScalaJSPlugin)
     .settings(dottySettings)
-    .settings(libraryDependencies += "org.scala-js" %%% "scala-js-macrotask-executor" % "1.0.0")
+    .settings(
+//      scalaJSLinkerConfig ~= { _.withModuleKind(ModuleKind.ESModule) },
+      scalaJSLinkerConfig ~= { _.withSourceMap(false) },
+      scalaJSUseMainModuleInitializer := true,
+      libraryDependencies ++= Seq(
+        "org.scala-js" %%% "scala-js-macrotask-executor" % "1.0.0",
+        "com.raquo"    %%% "laminar" % LaminarVersion
+      )
+    )
     .settings(
       scalacOptions ++= {
         if (scalaVersion.value == Scala3) {
