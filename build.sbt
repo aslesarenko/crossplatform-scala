@@ -23,7 +23,7 @@ inThisBuild(
   )
 )
 
-lazy val scryptox = project
+lazy val scryptx = project
     .in(file("."))
     .settings(
       publish / skip := true,
@@ -42,7 +42,7 @@ lazy val core = crossProject(JSPlatform, JVMPlatform/*, NativePlatform*/)
     .in(file("core"))
     .settings(stdSettings("core"))
     .settings(crossProjectSettings)
-    .settings(buildInfoSettings("scryptox"))
+    .settings(buildInfoSettings("scryptx"))
     .settings(libraryDependencies ++= Seq(
       "org.scalatest" %%% "scalatest" % "3.2.11" % Test
     ))
@@ -92,7 +92,7 @@ lazy val coreTests = crossProject(JSPlatform, JVMPlatform)
     .dependsOn(core)
     .settings(stdSettings("core-tests"))
     .settings(crossProjectSettings)
-    .settings(buildInfoSettings("scryptox"))
+    .settings(buildInfoSettings("scryptx"))
     .settings(publish / skip := true)
     .settings(
       Compile / classLoaderLayeringStrategy := ClassLoaderLayeringStrategy.Flat
