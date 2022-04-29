@@ -57,16 +57,19 @@ lazy val coreJVM = core.jvm
     .settings(mimaSettings(failOnProblem = true))
 
 lazy val coreJS = core.js
-    .enablePlugins(ScalaJSPlugin)
+    .enablePlugins(ScalaJSBundlerPlugin/*ScalaJSPlugin auto activated*/)
     .settings(dottySettings)
     .settings(
       scalaJSLinkerConfig ~= { _.withSourceMap(false) },
       scalaJSUseMainModuleInitializer := true,
-      jsEnv := new org.scalajs.jsenv.jsdomnodejs.JSDOMNodeJSEnv(),
+      Test / requireJsDomEnv := true,
+      installJsdom / version := "19.0.0",
       libraryDependencies ++= Seq(
         "org.scala-js" %%% "scala-js-macrotask-executor" % "1.0.0",
         "com.raquo"    %%% "laminar" % "0.14.2"
-      )
+      ),
+      Compile / npmDependencies += "elliptic" -> "6.5.4",
+      useYarn := true
     )
     .settings(
       scalacOptions ++= {
