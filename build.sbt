@@ -46,7 +46,7 @@ lazy val core = crossProject(JSPlatform, JVMPlatform/*, NativePlatform*/)
     .settings(libraryDependencies ++= Seq(
       "org.scalatest" %%% "scalatest" % "3.2.11" % Test
     ))
-    .enablePlugins(BuildInfoPlugin, ScalaJSPlugin)
+    .enablePlugins(BuildInfoPlugin)
 
 lazy val coreJVM = core.jvm
     .settings(dottySettings)

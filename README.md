@@ -7,7 +7,11 @@
 4. `yarn exec vite` (in another tab)
 5. open `http://localhost:3000`
 
+## Tutorials
+- [Hands-on Scala.js](https://www.lihaoyi.com/hands-on-scala-js/#Hands-onScala.js)
+
+
 ## References
 
 - [Elliptic: Fast elliptic-curve cryptography in a plain javascript implementation](https://www.npmjs.com/package/elliptic)
-- 
+- [ScalaTags: a small XML/HTML construction library for Scala](https://github.com/com-lihaoyi/scalatags) 
