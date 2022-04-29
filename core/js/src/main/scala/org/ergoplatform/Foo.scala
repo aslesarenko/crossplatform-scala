@@ -39,13 +39,13 @@ object Main {
     })
 
     // laminar
-    val appContainer = dom.document.querySelector("#app")
-    val diffBus = new EventBus[Unit]
-    val view = div(
-      h3("Bar.a"),
-      button(Bar.a.toString, onClick.map(_ => appendPar(document.body, "Clicked!")) --> diffBus)
-    )
-    val _ = render(appContainer, view)
+//    val appContainer = dom.document.querySelector("#app")
+//    val diffBus = new EventBus[Unit]
+//    val view = div(
+//      h3("Bar.a"),
+//      button(Bar.a.toString, onClick.map(_ => appendPar(document.body, "Clicked!")) --> diffBus)
+//    )
+//    val _ = render(appContainer, view)
 
 //    waitForLoad {
 //      val appContainer = dom.document.querySelector("#app")
