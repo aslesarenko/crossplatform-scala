@@ -20,7 +20,6 @@ object BuildHelper {
   val Scala3: String   = versions("3")
 
   val SilencerVersion = "1.7.8"
-  val LaminarVersion       = "0.13.1"
 
   private val stdOptions = Seq(
     "-deprecation",

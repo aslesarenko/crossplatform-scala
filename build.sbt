@@ -23,16 +23,18 @@ inThisBuild(
   )
 )
 
-lazy val root = project
+lazy val scryptox = project
     .in(file("."))
     .settings(
       publish / skip := true,
-      console        := (coreJVM / Compile / console).value,
+//      console        := (coreJVM / Compile / console).value,
       unusedCompileDependenciesFilter -= moduleFilter( "org.scala-js", "scalajs-library" )
     )
     .aggregate(
       coreJS,
-      coreJVM
+      coreJVM,
+      coreTestsJS,
+      coreTestsJVM
     )
     .enablePlugins(ScalaJSPlugin)
 
@@ -40,8 +42,11 @@ lazy val core = crossProject(JSPlatform, JVMPlatform/*, NativePlatform*/)
     .in(file("core"))
     .settings(stdSettings("core"))
     .settings(crossProjectSettings)
-    .settings(buildInfoSettings("org.ergoplatform"))
-    .enablePlugins(BuildInfoPlugin)
+    .settings(buildInfoSettings("scryptox"))
+    .settings(libraryDependencies ++= Seq(
+      "org.scalatest" %%% "scalatest" % "3.2.11" % Test
+    ))
+    .enablePlugins(BuildInfoPlugin, ScalaJSPlugin)
 
 lazy val coreJVM = core.jvm
     .settings(dottySettings)
@@ -57,9 +62,10 @@ lazy val coreJS = core.js
     .settings(
       scalaJSLinkerConfig ~= { _.withSourceMap(false) },
       scalaJSUseMainModuleInitializer := true,
+      jsEnv := new org.scalajs.jsenv.jsdomnodejs.JSDOMNodeJSEnv(),
       libraryDependencies ++= Seq(
         "org.scala-js" %%% "scala-js-macrotask-executor" % "1.0.0",
-        "com.raquo"    %%% "laminar" % LaminarVersion
+        "com.raquo"    %%% "laminar" % "0.14.2"
       )
     )
     .settings(
@@ -86,7 +92,7 @@ lazy val coreTests = crossProject(JSPlatform, JVMPlatform)
     .dependsOn(core)
     .settings(stdSettings("core-tests"))
     .settings(crossProjectSettings)
-    .settings(buildInfoSettings("org.ergoplatform"))
+    .settings(buildInfoSettings("scryptox"))
     .settings(publish / skip := true)
     .settings(
       Compile / classLoaderLayeringStrategy := ClassLoaderLayeringStrategy.Flat
