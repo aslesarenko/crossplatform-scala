@@ -1,5 +1,7 @@
 package org.ergoplatform
 
+import scorex.crypto.hash
+
 import java.text.SimpleDateFormat
 import java.util.TimeZone
 
@@ -13,4 +15,7 @@ object Platform {
     fmt.format(new java.util.Date(ts))
   }
 
+  def blake2b256(bytes: Array[Byte]): Array[Byte] = {
+    hash.Blake2b256.hash(bytes)
+  }
 }

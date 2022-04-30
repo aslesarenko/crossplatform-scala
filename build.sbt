@@ -68,7 +68,11 @@ lazy val coreJS = core.js
         "org.scala-js" %%% "scala-js-macrotask-executor" % "1.0.0",
         "com.raquo"    %%% "laminar" % "0.14.2"
       ),
-      Compile / npmDependencies += "elliptic" -> "6.5.4",
+      Compile / npmDependencies ++= Seq(
+        "bn.js" -> "5.2.0",
+        "elliptic" -> "6.5.4",
+        "blakejs" -> "1.2.1"
+      ),
       useYarn := true
     )
     .settings(
