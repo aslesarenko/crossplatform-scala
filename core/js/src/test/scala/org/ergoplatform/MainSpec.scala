@@ -6,7 +6,7 @@ import org.scalatest.BeforeAndAfterEach
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.propspec.AnyPropSpec
 
-class FooSpec extends AnyPropSpec with Matchers with BeforeAndAfterEach {
+class MainSpec extends AnyPropSpec with Matchers with BeforeAndAfterEach {
 
   override protected def beforeEach(): Unit = {
     super.beforeEach()

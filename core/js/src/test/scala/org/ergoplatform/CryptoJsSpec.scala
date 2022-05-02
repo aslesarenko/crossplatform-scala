@@ -3,7 +3,6 @@ package org.ergoplatform
 import org.scalatest.propspec.AnyPropSpec
 import org.scalatest.matchers.should.Matchers
 
-import scala.collection.immutable.ArraySeq
 import scala.scalajs.js
 
 class CryptoJsSpec extends AnyPropSpec with Matchers {
@@ -30,7 +29,7 @@ class CryptoJsSpec extends AnyPropSpec with Matchers {
 
   property("toHex/fromHex") {
     val xs = Array[Short](1, 2, 3)
-    val jsxs = js.Array(ArraySeq.unsafeWrapArray(xs):_*)
+    val jsxs = js.Array(xs.toSeq:_*)
     val hex = Hash.utils.toHex(jsxs)
     hex shouldBe "010203"
     val jsys = Hash.utils.toArray(hex, "hex")

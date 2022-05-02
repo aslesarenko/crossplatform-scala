@@ -1,0 +1,86 @@
+name: CI
+
+env:
+  JDK_JAVA_OPTIONS: -XX:+PrintCommandLineFlags -Xmx3G # JDK_JAVA_OPTIONS is _the_ env. variable to use for modern Java
+  JVM_OPTS: -XX:+PrintCommandLineFlags -Xmx3G # for Java 8 only (sadly, it is not modern enough for JDK_JAVA_OPTIONS)
+
+on:
+  pull_request:
+  push:
+    branches: ['master']
+  release:
+    types:
+      - published
+
+jobs:
+  compile:
+    runs-on: ubuntu-20.04
+    timeout-minutes: 60
+    steps:
+      - name: Checkout current branch
+        uses: actions/checkout@v3.0.2
+      - name: Setup Java
+        uses: actions/setup-java@v2.5.0
+        with:
+          distribution: temurin
+          java-version: 17
+          check-latest: true
+      - name: Cache scala dependencies
+        uses: coursier/cache-action@v6
+      - name: Check generation of ScalaDoc
+        run: ./sbt +Test/compile
+
+  test:
+    runs-on: ubuntu-20.04
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        scala: ['2.11.12', '2.12.15', '2.13.8']
+        platform: ['JVM']
+    steps:
+    - name: Checkout current branch
+      uses: actions/checkout@v3.0.2
+    - name: Setup Java
+      uses: actions/setup-java@v2.5.0
+      with:
+        distribution: temurin
+        java-version: 17
+        check-latest: true
+    - name: Cache scala dependencies
+      uses: coursier/cache-action@v6
+    - name: Test 2.11.x
+      if: ${{ startsWith(matrix.scala, '2.11.') }}
+      run: ./sbt ++${{ matrix.scala }}! test${{ matrix.platform }}211
+    - name: Test 2.12.x and 2.13.x
+      if: ${{ !startsWith(matrix.scala, '2.11.') && !startsWith(matrix.scala, '3.') }}
+      run: ./sbt ++${{ matrix.scala }}! test${{ matrix.platform }}
+
+  testPlatforms:
+    runs-on: ubuntu-20.04
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: ['JS']
+    steps:
+      - name: Checkout current branch
+        uses: actions/checkout@v3.0.2
+      - name: Setup Java
+        uses: actions/setup-java@v2.5.0
+        with:
+          distribution: temurin
+          java-version: 17
+          check-latest: true
+      - name: Cache scala dependencies
+        uses: coursier/cache-action@v6
+      - name: Test on different Scala target platforms
+        run: ./sbt test${{ matrix.platform }}
+
+  ci:
+    runs-on: ubuntu-20.04
+    needs: [compile, test, testPlatforms]
+    steps:
+      - name: Aggregate of compile and tests
+        run: echo "ci passed"
+

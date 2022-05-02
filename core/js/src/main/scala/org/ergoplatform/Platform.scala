@@ -1,6 +1,5 @@
 package org.ergoplatform
 
-import scala.collection.immutable.ArraySeq
 import scalajs.js
 
 object Platform{
@@ -9,7 +8,7 @@ object Platform{
   }
 
   def bytesToJsShorts(bytes: Array[Byte]): js.Array[Short] = {
-    js.Array(ArraySeq.unsafeWrapArray(bytes.map(x => (x & 0xFF).toShort)):_*)
+    js.Array(bytes.map(x => (x & 0xFF).toShort).toSeq:_*)
   }
 
   def jsShortsToBytes(jsShorts: js.Array[Short]): Array[Byte] = {

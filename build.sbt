@@ -38,7 +38,7 @@ lazy val scryptx = project
     )
     .enablePlugins(ScalaJSPlugin)
 
-lazy val core = crossProject(JSPlatform, JVMPlatform/*, NativePlatform*/)
+lazy val core = crossProject(JSPlatform, JVMPlatform)
     .in(file("core"))
     .settings(stdSettings("core"))
     .settings(crossProjectSettings)
@@ -49,7 +49,7 @@ lazy val core = crossProject(JSPlatform, JVMPlatform/*, NativePlatform*/)
     .enablePlugins(BuildInfoPlugin)
 
 lazy val coreJVM = core.jvm
-    .settings(dottySettings)
+//    .settings(dottySettings)
     .settings(replSettings)
     .settings(libraryDependencies ++= Seq(
       "org.bouncycastle" % "bcprov-jdk15on" % "1.64",
@@ -58,7 +58,7 @@ lazy val coreJVM = core.jvm
 
 lazy val coreJS = core.js
     .enablePlugins(ScalaJSBundlerPlugin/*ScalaJSPlugin auto activated*/)
-    .settings(dottySettings)
+//    .settings(dottySettings)
     .settings(
       scalaJSLinkerConfig ~= { _.withSourceMap(false) },
       scalaJSUseMainModuleInitializer := true,
@@ -111,12 +111,12 @@ lazy val coreTests = crossProject(JSPlatform, JVMPlatform)
     .enablePlugins(BuildInfoPlugin)
 
 lazy val coreTestsJVM = coreTests.jvm
-    .settings(dottySettings)
+//    .settings(dottySettings)
     .configure(_.enablePlugins(JCStressPlugin))
     .settings(replSettings)
 
 lazy val coreTestsJS = coreTests.js
-    .settings(dottySettings)
+//    .settings(dottySettings)
     .settings(
       scalaJSLinkerConfig ~= { _.withSourceMap(false) },
       scalacOptions ++= {

@@ -213,7 +213,11 @@ object BuildHelper {
 
   def stdSettings(prjName: String) = Seq(
     name                     := s"$prjName",
-    crossScalaVersions       := Seq(Scala211, Scala212, Scala213, Scala3),
+    crossScalaVersions       :=
+        (if (crossProjectPlatform.value.identifier == "js")
+          Seq(Scala212, Scala213)
+        else
+          Seq(Scala211, Scala212, Scala213)),
     ThisBuild / scalaVersion := Scala213,
     scalacOptions ++= stdOptions ++ extraOptions(scalaVersion.value, optimize = !isSnapshot.value),
     libraryDependencies ++= {
