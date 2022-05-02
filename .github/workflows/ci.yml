@@ -56,7 +56,7 @@ jobs:
       if: ${{ !startsWith(matrix.scala, '2.11.') && !startsWith(matrix.scala, '3.') }}
       run: ./sbt ++${{ matrix.scala }}! test${{ matrix.platform }}
 
-  testPlatforms:
+  testJS:
     runs-on: ubuntu-20.04
     timeout-minutes: 60
     strategy:
