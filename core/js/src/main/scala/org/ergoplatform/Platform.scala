@@ -3,10 +3,7 @@ package org.ergoplatform
 import scalajs.js
 
 object Platform{
-  def format(ts: Long) = {
-    new js.Date(ts).toISOString()
-  }
-
+  
   def bytesToJsShorts(bytes: Array[Byte]): js.Array[Short] = {
     js.Array(bytes.map(x => (x & 0xFF).toShort).toSeq:_*)
   }
