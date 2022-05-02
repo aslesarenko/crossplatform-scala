@@ -32,9 +32,7 @@ lazy val scryptx = project
     )
     .aggregate(
       coreJS,
-      coreJVM,
-      coreTestsJS,
-      coreTestsJVM
+      coreJVM
     )
     .enablePlugins(ScalaJSPlugin)
 
@@ -95,35 +93,3 @@ lazy val coreJS = core.js
 //      )
 //    )
 
-lazy val coreTests = crossProject(JSPlatform, JVMPlatform)
-    .in(file("core-tests"))
-    .dependsOn(core)
-    .settings(stdSettings("core-tests"))
-    .settings(crossProjectSettings)
-    .settings(buildInfoSettings("scryptx"))
-    .settings(publish / skip := true)
-    .settings(
-      Compile / classLoaderLayeringStrategy := ClassLoaderLayeringStrategy.Flat
-    )
-    .settings(libraryDependencies ++= Seq(
-      "org.scalatest" %% "scalatest" % "3.2.11"
-    ))
-    .enablePlugins(BuildInfoPlugin)
-
-lazy val coreTestsJVM = coreTests.jvm
-//    .settings(dottySettings)
-    .configure(_.enablePlugins(JCStressPlugin))
-    .settings(replSettings)
-
-lazy val coreTestsJS = coreTests.js
-//    .settings(dottySettings)
-    .settings(
-      scalaJSLinkerConfig ~= { _.withSourceMap(false) },
-      scalacOptions ++= {
-        if (scalaVersion.value == Scala3) {
-          List()
-        } else {
-          List("-P:scalajs:nowarnGlobalExecutionContext")
-        }
-      }
-    )
