@@ -25,6 +25,7 @@ inThisBuild(
 
 addCommandAlias("testJVM", ";coreJVM/test")
 addCommandAlias("testJVM211", ";coreJVM/test")
+addCommandAlias("testJS", ";coreJS/test")
 
 lazy val scryptx = project
     .in(file("."))
