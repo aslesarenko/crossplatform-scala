@@ -70,6 +70,7 @@ lazy val coreJS = core.js
       ),
       Compile / npmDependencies ++= Seq(
         "bn.js" -> "5.2.0",
+        "hash.js" -> "1.1.7",
         "elliptic" -> "6.5.4",
         "blakejs" -> "1.2.1"
       ),

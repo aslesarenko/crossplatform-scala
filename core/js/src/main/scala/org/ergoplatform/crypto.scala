@@ -31,3 +31,32 @@ object blake extends js.Object {
   @nowarn
   def blake2bFinal(ctx: Context): js.Array[Short] = js.native
 }
+
+@JSImport("hash.js", JSImport.Default)
+@js.native
+object Hash extends js.Object {
+  def sha256(): Sha256 = js.native
+  val utils: Utils = js.native
+}
+
+@js.native
+trait Utils extends js.Object {
+  @nowarn
+  def toArray(msg: String, enc: String): js.Array[Short] = js.native
+  @nowarn
+  def toHex(msg: js.Array[Short]): String = js.native
+}
+
+@js.native
+trait MessageDigest[T] extends js.Object {
+  val blockSize: Int = js.native
+  val outSize: Int = js.native
+}
+
+@js.native
+trait Sha256 extends js.Object with MessageDigest[Sha256] {
+  @nowarn
+  def update(msg: String, enc: String): Sha256 = js.native
+  @nowarn
+  def digest(enc: String): String = js.native
+}
