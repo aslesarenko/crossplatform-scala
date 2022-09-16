@@ -82648,8 +82648,9 @@ $sct_Lorg_scalatest_wordspec_AnyWordSpec__stinit__();
 $sct_Lorg_ergoplatform_CryptoJsSpec__stinit__();
 $sct_Lorg_ergoplatform_CryptoSpec__stinit__();
 $sct_Lorg_ergoplatform_MainSpec__stinit__();
-$s_Lorg_scalajs_testing_bridge_Bridge__start__V();
 var main = {
-    
+  run:  function () {
+      $s_Lorg_scalajs_testing_bridge_Bridge__start__V();
+  }
 };
 module.exports = main;
