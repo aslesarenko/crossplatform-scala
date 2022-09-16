@@ -24,6 +24,9 @@ object Platform {
 
   def blake2b256_BC(bytes: Array[Byte]): Array[Byte] = {
     val digest = new Blake2bDigest(32 * 8)
-    hexToBytes(digest.toString)
+    digest.update(bytes, 0, bytes.length)
+    val res = new Array[Byte](32)
+    digest.doFinal(res, 0)
+    res
   }
 }
