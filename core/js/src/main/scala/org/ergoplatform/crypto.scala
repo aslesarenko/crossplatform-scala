@@ -3,6 +3,7 @@ package org.ergoplatform
 import scala.annotation.nowarn
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSImport
+import scala.scalajs.js.typedarray.Int8Array
 
 /** See package info at https://www.npmjs.com/package/elliptic */
 @JSImport("elliptic", "ec")
@@ -66,3 +67,30 @@ object Hash extends js.Object {
   }
 }
 
+@JSImport("bouncycastle-js", JSImport.Namespace)
+@js.native
+object BouncycastleJs extends js.Object {
+
+  @js.native
+  trait Blake2bDigest extends js.Object {
+    @nowarn
+    def $doUpdate(in: RtArray[Byte], inOff: Int, len: Int): Unit = js.native
+    @nowarn
+    def $doFinal(out: RtArray[Byte], outOff: Int): Int = js.native
+  }
+
+  @js.native
+  trait Crypto extends js.Object {
+    def createBlake2bDigest(size: Int): Blake2bDigest
+  }
+  
+  def bouncyCastle: Crypto = js.native
+
+  @js.native
+  trait RtArray[T] extends js.Object {
+    def data: Int8Array
+  }
+
+  @nowarn
+  def createByteArrayFromData(data: js.Array[Byte]): RtArray[Byte] = js.native
+}

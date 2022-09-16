@@ -46,6 +46,11 @@ lazy val core = crossProject(JSPlatform, JVMPlatform)
     .settings(crossProjectSettings)
     .settings(buildInfoSettings("scryptx"))
     .settings(libraryDependencies ++= Seq(
+      scalaOrganization.value % "scala-reflect" % scalaVersion.value % "provided",
+      (if (crossProjectPlatform.value.identifier == "js")
+        "org.typelevel" %%% "spire-macros" % "0.17.0-RC1"
+        else
+        "org.typelevel" %%% "spire-macros" % "0.17.0-M1"),
       "org.scalatest" %%% "scalatest" % "3.2.11" % Test
     ))
     .enablePlugins(BuildInfoPlugin)
@@ -74,7 +79,8 @@ lazy val coreJS = core.js
         "bn.js" -> "5.2.0",
         "hash.js" -> "1.1.7",
         "elliptic" -> "6.5.4",
-        "blakejs" -> "1.2.1"
+        "blakejs" -> "1.2.1",
+        "bouncycastle-js" -> "0.1.6"
       ),
       useYarn := true
     )

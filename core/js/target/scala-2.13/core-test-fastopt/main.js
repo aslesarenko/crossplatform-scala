@@ -4836,97 +4836,8 @@ function $h_Lorg_ergoplatform_Platform$() {
   /*<skip>*/
 }
 $h_Lorg_ergoplatform_Platform$.prototype = $c_Lorg_ergoplatform_Platform$.prototype;
-$c_Lorg_ergoplatform_Platform$.prototype.bytesToJsBytes__AB__sjs_js_Array = (function(bytes) {
-  var f = ((x$2) => {
-    var x = $uB(x$2);
-    return (((255 & x) << 24) >> 24)
-  });
-  $m_s_reflect_ManifestFactory$ByteManifest$();
-  var len = bytes.u.length;
-  var ys = new $ac_B(len);
-  if ((len > 0)) {
-    var i = 0;
-    if ((bytes instanceof $ac_O)) {
-      var x2 = $asArrayOf_O(bytes, 1);
-      while ((i < len)) {
-        var $$x1 = i;
-        var arg1 = x2.get(i);
-        ys.set($$x1, $uB(f(arg1)));
-        i = ((1 + i) | 0)
-      }
-    } else if ((bytes instanceof $ac_I)) {
-      var x3 = $asArrayOf_I(bytes, 1);
-      while ((i < len)) {
-        var $$x2 = i;
-        var arg1$1 = x3.get(i);
-        ys.set($$x2, $uB(f(arg1$1)));
-        i = ((1 + i) | 0)
-      }
-    } else if ((bytes instanceof $ac_D)) {
-      var x4 = $asArrayOf_D(bytes, 1);
-      while ((i < len)) {
-        var $$x3 = i;
-        var arg1$2 = x4.get(i);
-        ys.set($$x3, $uB(f(arg1$2)));
-        i = ((1 + i) | 0)
-      }
-    } else if ((bytes instanceof $ac_J)) {
-      var x5 = $asArrayOf_J(bytes, 1);
-      while ((i < len)) {
-        var $$x4 = i;
-        var t = x5.get(i);
-        var lo = t.RTLong__f_lo;
-        var hi = t.RTLong__f_hi;
-        ys.set($$x4, $uB(f(new $c_RTLong(lo, hi))));
-        i = ((1 + i) | 0)
-      }
-    } else if ((bytes instanceof $ac_F)) {
-      var x6 = $asArrayOf_F(bytes, 1);
-      while ((i < len)) {
-        var $$x5 = i;
-        var arg1$3 = x6.get(i);
-        ys.set($$x5, $uB(f(arg1$3)));
-        i = ((1 + i) | 0)
-      }
-    } else if ((bytes instanceof $ac_C)) {
-      var x7 = $asArrayOf_C(bytes, 1);
-      while ((i < len)) {
-        var $$x6 = i;
-        var arg1$4 = x7.get(i);
-        ys.set($$x6, $uB(f($bC(arg1$4))));
-        i = ((1 + i) | 0)
-      }
-    } else if ((bytes !== null)) {
-      while ((i < len)) {
-        var $$x7 = i;
-        var arg1$5 = bytes.get(i);
-        ys.set($$x7, $uB(f(arg1$5)));
-        i = ((1 + i) | 0)
-      }
-    } else if ((bytes instanceof $ac_S)) {
-      var x9 = $asArrayOf_S(bytes, 1);
-      while ((i < len)) {
-        var $$x8 = i;
-        var arg1$6 = x9.get(i);
-        ys.set($$x8, $uB(f(arg1$6)));
-        i = ((1 + i) | 0)
-      }
-    } else if ((bytes instanceof $ac_Z)) {
-      var x10 = $asArrayOf_Z(bytes, 1);
-      while ((i < len)) {
-        var $$x9 = i;
-        var arg1$7 = x10.get(i);
-        ys.set($$x9, $uB(f(arg1$7)));
-        i = ((1 + i) | 0)
-      }
-    } else {
-      throw new $c_s_MatchError(bytes)
-    }
-  };
-  var seq = $m_sc_ArrayOps$().toIndexedSeq$extension__O__sci_IndexedSeq(ys);
-  return [...$m_sjsr_Compat$().toJSVarArgsImpl__sci_Seq__sjs_js_Array(seq)]
-});
 $c_Lorg_ergoplatform_Platform$.prototype.bytesToJsShorts__AB__sjs_js_Array = (function(bytes) {
+  var $$x10 = $m_s_Predef$();
   var f = ((x$2) => {
     var x = $uB(x$2);
     return (((255 & x) << 16) >> 16)
@@ -5013,7 +4924,7 @@ $c_Lorg_ergoplatform_Platform$.prototype.bytesToJsShorts__AB__sjs_js_Array = (fu
       throw new $c_s_MatchError(bytes)
     }
   };
-  var seq = $m_sc_ArrayOps$().toIndexedSeq$extension__O__sci_IndexedSeq(ys);
+  var seq = $$x10.copyArrayToImmutableIndexedSeq__O__sci_IndexedSeq(ys);
   return [...$m_sjsr_Compat$().toJSVarArgsImpl__sci_Seq__sjs_js_Array(seq)]
 });
 $c_Lorg_ergoplatform_Platform$.prototype.jsShortsToBytes__sjs_js_Array__AB = (function(jsShorts) {
@@ -5058,8 +4969,10 @@ $c_Lorg_ergoplatform_Platform$.prototype.sha256__AB__AB = (function(bytes) {
 $c_Lorg_ergoplatform_Platform$.prototype.blake2b256_BC__AB__AB = (function(bytes) {
   var bc = $i_bouncycastle$002djs.bouncyCastle;
   var digest = bc.createBlake2bDigest(256);
-  var in$1 = $i_bouncycastle$002djs.createByteArrayFromData(this.bytesToJsBytes__AB__sjs_js_Array(bytes));
-  digest["^date"](in$1, 0, bytes.u.length);
+  var $$x1 = $i_bouncycastle$002djs;
+  var seq = $m_s_Predef$().copyArrayToImmutableIndexedSeq__O__sci_IndexedSeq(bytes);
+  var in$1 = $$x1.createByteArrayFromData([...$m_sjsr_Compat$().toJSVarArgsImpl__sci_Seq__sjs_js_Array(seq)]);
+  digest.$doUpdate(in$1, 0, bytes.u.length);
   var res = $i_bouncycastle$002djs.createByteArrayFromData(new Array(32));
   digest.$doFinal(res, 0);
   var array = res.data;
@@ -16292,6 +16205,9 @@ function $h_s_LowPriorityImplicits2() {
   /*<skip>*/
 }
 $h_s_LowPriorityImplicits2.prototype = $c_s_LowPriorityImplicits2.prototype;
+$c_s_LowPriorityImplicits2.prototype.copyArrayToImmutableIndexedSeq__O__sci_IndexedSeq = (function(xs) {
+  return ((xs === null) ? null : $m_sc_ArrayOps$().toIndexedSeq$extension__O__sci_IndexedSeq(xs))
+});
 /** @constructor */
 function $c_s_PartialFunction$() {
   this.s_PartialFunction$__f_fallback_fn = null;
@@ -70435,6 +70351,7 @@ function $c_Lorg_ergoplatform_CryptoSpec() {
   this.Lorg_scalatest_propspec_AnyPropSpec__f_styleName = null;
   this.Lorg_scalatest_propspec_AnyPropSpec__f_NoArgTest$module = null;
   this.Lorg_scalatest_propspec_AnyPropSpec__f_succeed = null;
+  this.Lorg_ergoplatform_CryptoSpec__f_expectedHash = null;
   this.Lorg_ergoplatform_CryptoSpec__f_key = null;
   this.Lorg_ergoplatform_CryptoSpec__f_value = null;
   this.Lorg_ergoplatform_CryptoSpec__f_a = null;
@@ -70475,39 +70392,39 @@ function $c_Lorg_ergoplatform_CryptoSpec() {
   $f_Lorg_scalatest_matchers_dsl_MatcherWords__$init$__V(this);
   $f_Lorg_scalactic_Explicitly__$init$__V(this);
   $f_Lorg_scalatest_matchers_should_Matchers__$init$__V(this);
+  var array = [17, (-64), (-25), (-101), 113, (-61), (-105), 108, (-51), 12, 2, (-47), 49, 14, 37, 22, (-64), (-114), (-36), (-99), (-117), 111, 87, (-52), (-42), (-128), (-42), 58, 77, (-114), 114, (-38)];
+  var xs = $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array);
+  $m_s_reflect_ManifestFactory$ByteManifest$();
+  var len = xs.length__I();
+  var array$1 = new $ac_B(len);
+  var this$7 = new $c_sc_IndexedSeqView$Id(xs);
+  var iterator = $ct_sc_IndexedSeqView$IndexedSeqViewIterator__sc_IndexedSeqView__(new $c_sc_IndexedSeqView$IndexedSeqViewIterator(), this$7);
+  var i = 0;
+  while ((iterator.sc_IndexedSeqView$IndexedSeqViewIterator__f_scala$collection$IndexedSeqView$IndexedSeqViewIterator$$remainder > 0)) {
+    array$1.set(i, $uB(iterator.next__O()));
+    i = ((1 + i) | 0)
+  };
+  this.Lorg_ergoplatform_CryptoSpec__f_expectedHash = array$1;
   var testTags = $m_sci_Nil$();
   var testFun = new $c_sjsr_AnonFunction0((() => {
-    var array = [1, 2, 3];
-    var xs = $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array);
-    $m_s_reflect_ManifestFactory$ByteManifest$();
-    var len = xs.length__I();
-    var array$1 = new $ac_B(len);
-    var this$8 = new $c_sc_IndexedSeqView$Id(xs);
-    var iterator = $ct_sc_IndexedSeqView$IndexedSeqViewIterator__sc_IndexedSeqView__(new $c_sc_IndexedSeqView$IndexedSeqViewIterator(), this$8);
-    var i = 0;
-    while ((iterator.sc_IndexedSeqView$IndexedSeqViewIterator__f_scala$collection$IndexedSeqView$IndexedSeqViewIterator$$remainder > 0)) {
-      array$1.set(i, $uB(iterator.next__O()));
-      i = ((1 + i) | 0)
-    };
-    var hash = $m_Lorg_ergoplatform_Platform$().blake2b256__AB__AB(array$1);
-    var pos = new $c_Lorg_scalactic_source_Position("CryptoSpec.scala", "Please set the environment variable SCALACTIC_FILL_FILE_PATHNAMES to yes at compile time to enable this feature.", 12);
-    var prettifier = $m_Lorg_scalactic_Prettifier$().Lorg_scalactic_Prettifier$__f_default;
-    var $$x1 = $ct_Lorg_scalatest_matchers_should_Matchers$AnyShouldWrapper__Lorg_scalatest_matchers_should_Matchers__O__Lorg_scalactic_source_Position__Lorg_scalactic_Prettifier__(new $c_Lorg_scalatest_matchers_should_Matchers$AnyShouldWrapper(), this, hash, pos, prettifier);
-    var array$2 = [17, (-64), (-25), (-101), 113, (-61), (-105), 108, (-51), 12, 2, (-47), 49, 14, 37, 22, (-64), (-114), (-36), (-99), (-117), 111, 87, (-52), (-42), (-128), (-42), 58, 77, (-114), 114, (-38)];
+    var array$2 = [1, 2, 3];
     var xs$1 = $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$2);
     $m_s_reflect_ManifestFactory$ByteManifest$();
     var len$1 = xs$1.length__I();
     var array$3 = new $ac_B(len$1);
-    var this$16 = new $c_sc_IndexedSeqView$Id(xs$1);
-    var iterator$1 = $ct_sc_IndexedSeqView$IndexedSeqViewIterator__sc_IndexedSeqView__(new $c_sc_IndexedSeqView$IndexedSeqViewIterator(), this$16);
+    var this$15 = new $c_sc_IndexedSeqView$Id(xs$1);
+    var iterator$1 = $ct_sc_IndexedSeqView$IndexedSeqViewIterator__sc_IndexedSeqView__(new $c_sc_IndexedSeqView$IndexedSeqViewIterator(), this$15);
     var i$1 = 0;
     while ((iterator$1.sc_IndexedSeqView$IndexedSeqViewIterator__f_scala$collection$IndexedSeqView$IndexedSeqViewIterator$$remainder > 0)) {
       array$3.set(i$1, $uB(iterator$1.next__O()));
       i$1 = ((1 + i$1) | 0)
     };
-    return $$x1.shouldBe__O__Lorg_scalatest_compatible_Assertion(array$3)
+    var hash = $m_Lorg_ergoplatform_Platform$().blake2b256__AB__AB(array$3);
+    var pos = new $c_Lorg_scalactic_source_Position("CryptoSpec.scala", "Please set the environment variable SCALACTIC_FILL_FILE_PATHNAMES to yes at compile time to enable this feature.", 14);
+    var prettifier = $m_Lorg_scalactic_Prettifier$().Lorg_scalactic_Prettifier$__f_default;
+    return $ct_Lorg_scalatest_matchers_should_Matchers$AnyShouldWrapper__Lorg_scalatest_matchers_should_Matchers__O__Lorg_scalactic_source_Position__Lorg_scalactic_Prettifier__(new $c_Lorg_scalatest_matchers_should_Matchers$AnyShouldWrapper(), this, hash, pos, prettifier).shouldBe__O__Lorg_scalatest_compatible_Assertion(this.Lorg_ergoplatform_CryptoSpec__f_expectedHash)
   }));
-  var pos$1 = new $c_Lorg_scalactic_source_Position("CryptoSpec.scala", "Please set the environment variable SCALACTIC_FILL_FILE_PATHNAMES to yes at compile time to enable this feature.", 9);
+  var pos$1 = new $c_Lorg_scalactic_source_Position("CryptoSpec.scala", "Please set the environment variable SCALACTIC_FILL_FILE_PATHNAMES to yes at compile time to enable this feature.", 11);
   $p_Lorg_scalatest_propspec_AnyPropSpecLike__propertyImpl__T__sci_Seq__F0__Lorg_scalactic_source_Position__V(this, "blake2b256", testTags, testFun, pos$1);
   var testTags$1 = $m_sci_Nil$();
   var testFun$1 = new $c_sjsr_AnonFunction0((() => {
@@ -70524,60 +70441,47 @@ function $c_Lorg_ergoplatform_CryptoSpec() {
       i$2 = ((1 + i$2) | 0)
     };
     var hash$1 = $m_Lorg_ergoplatform_Platform$().blake2b256_BC__AB__AB(array$5);
-    var pos$2 = new $c_Lorg_scalactic_source_Position("CryptoSpec.scala", "Please set the environment variable SCALACTIC_FILL_FILE_PATHNAMES to yes at compile time to enable this feature.", 18);
+    var pos$2 = new $c_Lorg_scalactic_source_Position("CryptoSpec.scala", "Please set the environment variable SCALACTIC_FILL_FILE_PATHNAMES to yes at compile time to enable this feature.", 20);
     var prettifier$1 = $m_Lorg_scalactic_Prettifier$().Lorg_scalactic_Prettifier$__f_default;
-    var $$x2 = $ct_Lorg_scalatest_matchers_should_Matchers$AnyShouldWrapper__Lorg_scalatest_matchers_should_Matchers__O__Lorg_scalactic_source_Position__Lorg_scalactic_Prettifier__(new $c_Lorg_scalatest_matchers_should_Matchers$AnyShouldWrapper(), this, hash$1, pos$2, prettifier$1);
-    var array$6 = [17, (-64), (-25), (-101), 113, (-61), (-105), 108, (-51), 12, 2, (-47), 49, 14, 37, 22, (-64), (-114), (-36), (-99), (-117), 111, 87, (-52), (-42), (-128), (-42), 58, 77, (-114), 114, (-38)];
-    var xs$3 = $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$6);
-    $m_s_reflect_ManifestFactory$ByteManifest$();
-    var len$3 = xs$3.length__I();
-    var array$7 = new $ac_B(len$3);
-    var this$31 = new $c_sc_IndexedSeqView$Id(xs$3);
-    var iterator$3 = $ct_sc_IndexedSeqView$IndexedSeqViewIterator__sc_IndexedSeqView__(new $c_sc_IndexedSeqView$IndexedSeqViewIterator(), this$31);
-    var i$3 = 0;
-    while ((iterator$3.sc_IndexedSeqView$IndexedSeqViewIterator__f_scala$collection$IndexedSeqView$IndexedSeqViewIterator$$remainder > 0)) {
-      array$7.set(i$3, $uB(iterator$3.next__O()));
-      i$3 = ((1 + i$3) | 0)
-    };
-    return $$x2.shouldBe__O__Lorg_scalatest_compatible_Assertion(array$7)
+    return $ct_Lorg_scalatest_matchers_should_Matchers$AnyShouldWrapper__Lorg_scalatest_matchers_should_Matchers__O__Lorg_scalactic_source_Position__Lorg_scalactic_Prettifier__(new $c_Lorg_scalatest_matchers_should_Matchers$AnyShouldWrapper(), this, hash$1, pos$2, prettifier$1).shouldBe__O__Lorg_scalatest_compatible_Assertion(this.Lorg_ergoplatform_CryptoSpec__f_expectedHash)
   }));
-  var pos$3 = new $c_Lorg_scalactic_source_Position("CryptoSpec.scala", "Please set the environment variable SCALACTIC_FILL_FILE_PATHNAMES to yes at compile time to enable this feature.", 15);
+  var pos$3 = new $c_Lorg_scalactic_source_Position("CryptoSpec.scala", "Please set the environment variable SCALACTIC_FILL_FILE_PATHNAMES to yes at compile time to enable this feature.", 17);
   $p_Lorg_scalatest_propspec_AnyPropSpecLike__propertyImpl__T__sci_Seq__F0__Lorg_scalactic_source_Position__V(this, "blake2b256_BC", testTags$1, testFun$1, pos$3);
   var testTags$2 = $m_sci_Nil$();
   var testFun$2 = new $c_sjsr_AnonFunction0((() => {
     var bytes = $m_Lorg_ergoplatform_Platform$().hexToBytes__T__AB("deadbeef");
     var hex = $m_Lorg_ergoplatform_Platform$().sha256__AB__AB(bytes);
     var hashHex = $m_Lorg_ergoplatform_Platform$().bytesToHex__AB__T(hex);
-    var pos$4 = new $c_Lorg_scalactic_source_Position("CryptoSpec.scala", "Please set the environment variable SCALACTIC_FILL_FILE_PATHNAMES to yes at compile time to enable this feature.", 25);
+    var pos$4 = new $c_Lorg_scalactic_source_Position("CryptoSpec.scala", "Please set the environment variable SCALACTIC_FILL_FILE_PATHNAMES to yes at compile time to enable this feature.", 27);
     var prettifier$2 = $m_Lorg_scalactic_Prettifier$().Lorg_scalactic_Prettifier$__f_default;
     return new $c_Lorg_scalatest_matchers_should_Matchers$StringShouldWrapper(this, hashHex, pos$4, prettifier$2).shouldBe__O__Lorg_scalatest_compatible_Assertion("5f78c33274e43fa9de5659265c1d917e25c03722dcb0b8d27db8d5feaa813953")
   }));
-  var pos$5 = new $c_Lorg_scalactic_source_Position("CryptoSpec.scala", "Please set the environment variable SCALACTIC_FILL_FILE_PATHNAMES to yes at compile time to enable this feature.", 21);
+  var pos$5 = new $c_Lorg_scalactic_source_Position("CryptoSpec.scala", "Please set the environment variable SCALACTIC_FILL_FILE_PATHNAMES to yes at compile time to enable this feature.", 23);
   $p_Lorg_scalatest_propspec_AnyPropSpecLike__propertyImpl__T__sci_Seq__F0__Lorg_scalactic_source_Position__V(this, "sha256", testTags$2, testFun$2, pos$5);
   var testTags$3 = $m_sci_Nil$();
   var testFun$3 = new $c_sjsr_AnonFunction0((() => {
-    var array$8 = [1, 2, 3];
-    var xs$4 = $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$8);
+    var array$6 = [1, 2, 3];
+    var xs$3 = $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$6);
     $m_s_reflect_ManifestFactory$ByteManifest$();
-    var len$4 = xs$4.length__I();
-    var array$9 = new $ac_B(len$4);
-    var this$41 = new $c_sc_IndexedSeqView$Id(xs$4);
-    var iterator$4 = $ct_sc_IndexedSeqView$IndexedSeqViewIterator__sc_IndexedSeqView__(new $c_sc_IndexedSeqView$IndexedSeqViewIterator(), this$41);
-    var i$4 = 0;
-    while ((iterator$4.sc_IndexedSeqView$IndexedSeqViewIterator__f_scala$collection$IndexedSeqView$IndexedSeqViewIterator$$remainder > 0)) {
-      array$9.set(i$4, $uB(iterator$4.next__O()));
-      i$4 = ((1 + i$4) | 0)
+    var len$3 = xs$3.length__I();
+    var array$7 = new $ac_B(len$3);
+    var this$34 = new $c_sc_IndexedSeqView$Id(xs$3);
+    var iterator$3 = $ct_sc_IndexedSeqView$IndexedSeqViewIterator__sc_IndexedSeqView__(new $c_sc_IndexedSeqView$IndexedSeqViewIterator(), this$34);
+    var i$3 = 0;
+    while ((iterator$3.sc_IndexedSeqView$IndexedSeqViewIterator__f_scala$collection$IndexedSeqView$IndexedSeqViewIterator$$remainder > 0)) {
+      array$7.set(i$3, $uB(iterator$3.next__O()));
+      i$3 = ((1 + i$3) | 0)
     };
-    var hex$1 = $m_Lorg_ergoplatform_Platform$().bytesToHex__AB__T(array$9);
-    var pos$6 = new $c_Lorg_scalactic_source_Position("CryptoSpec.scala", "Please set the environment variable SCALACTIC_FILL_FILE_PATHNAMES to yes at compile time to enable this feature.", 32);
+    var hex$1 = $m_Lorg_ergoplatform_Platform$().bytesToHex__AB__T(array$7);
+    var pos$6 = new $c_Lorg_scalactic_source_Position("CryptoSpec.scala", "Please set the environment variable SCALACTIC_FILL_FILE_PATHNAMES to yes at compile time to enable this feature.", 34);
     var prettifier$3 = $m_Lorg_scalactic_Prettifier$().Lorg_scalactic_Prettifier$__f_default;
     new $c_Lorg_scalatest_matchers_should_Matchers$StringShouldWrapper(this, hex$1, pos$6, prettifier$3).shouldBe__O__Lorg_scalatest_compatible_Assertion("010203");
     var decodedBytes = $m_Lorg_ergoplatform_Platform$().hexToBytes__T__AB("010203");
-    var pos$7 = new $c_Lorg_scalactic_source_Position("CryptoSpec.scala", "Please set the environment variable SCALACTIC_FILL_FILE_PATHNAMES to yes at compile time to enable this feature.", 35);
+    var pos$7 = new $c_Lorg_scalactic_source_Position("CryptoSpec.scala", "Please set the environment variable SCALACTIC_FILL_FILE_PATHNAMES to yes at compile time to enable this feature.", 37);
     var prettifier$4 = $m_Lorg_scalactic_Prettifier$().Lorg_scalactic_Prettifier$__f_default;
-    return $ct_Lorg_scalatest_matchers_should_Matchers$AnyShouldWrapper__Lorg_scalatest_matchers_should_Matchers__O__Lorg_scalactic_source_Position__Lorg_scalactic_Prettifier__(new $c_Lorg_scalatest_matchers_should_Matchers$AnyShouldWrapper(), this, decodedBytes, pos$7, prettifier$4).shouldBe__O__Lorg_scalatest_compatible_Assertion(array$9)
+    return $ct_Lorg_scalatest_matchers_should_Matchers$AnyShouldWrapper__Lorg_scalatest_matchers_should_Matchers__O__Lorg_scalactic_source_Position__Lorg_scalactic_Prettifier__(new $c_Lorg_scalatest_matchers_should_Matchers$AnyShouldWrapper(), this, decodedBytes, pos$7, prettifier$4).shouldBe__O__Lorg_scalatest_compatible_Assertion(array$7)
   }));
-  var pos$8 = new $c_Lorg_scalactic_source_Position("CryptoSpec.scala", "Please set the environment variable SCALACTIC_FILL_FILE_PATHNAMES to yes at compile time to enable this feature.", 28);
+  var pos$8 = new $c_Lorg_scalactic_source_Position("CryptoSpec.scala", "Please set the environment variable SCALACTIC_FILL_FILE_PATHNAMES to yes at compile time to enable this feature.", 30);
   $p_Lorg_scalatest_propspec_AnyPropSpecLike__propertyImpl__T__sci_Seq__F0__Lorg_scalactic_source_Position__V(this, "bytesToHex / hexToBytes", testTags$3, testFun$3, pos$8)
 }
 $c_Lorg_ergoplatform_CryptoSpec.prototype = new $h_Lorg_scalatest_propspec_AnyPropSpec();
@@ -82648,9 +82552,4 @@ $sct_Lorg_scalatest_wordspec_AnyWordSpec__stinit__();
 $sct_Lorg_ergoplatform_CryptoJsSpec__stinit__();
 $sct_Lorg_ergoplatform_CryptoSpec__stinit__();
 $sct_Lorg_ergoplatform_MainSpec__stinit__();
-var main = {
-  run:  function () {
-      $s_Lorg_scalajs_testing_bridge_Bridge__start__V();
-  }
-};
-module.exports = main;
+$s_Lorg_scalajs_testing_bridge_Bridge__start__V();

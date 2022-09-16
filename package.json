@@ -7,15 +7,14 @@
     "test": "jest"
   },
   "devDependencies": {
+    "blakejs": "1.2.1",
+    "bn.js": "5.2.0",
+    "bouncycastle-js": "^0.1.5",
+    "elliptic": "6.5.4",
+    "hash.js": "1.1.7",
     "jsdom": "19.0.0",
     "sass": "^1.35.1",
     "vite": "^2.3.7",
-    "bn.js": "5.2.0",
-    "hash.js": "1.1.7",
-    "elliptic": "6.5.4",
-    "blakejs": "1.2.1",
-    "bouncycastle-js": "^0.1.5",
-    "vite-plugin-html": "^2.0.7",
-    "jest": "^29.0.3"
+    "vite-plugin-html": "^2.0.7"
   }
 }
