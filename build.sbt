@@ -71,9 +71,12 @@ lazy val coreJS = core.js
       scalaJSUseMainModuleInitializer := true,
       Test / requireJsDomEnv := true,
       installJsdom / version := "19.0.0",
+      Test / jsEnv := new org.scalajs.jsenv.selenium.SeleniumJSEnv(
+        new org.openqa.selenium.chrome.ChromeOptions()),
       libraryDependencies ++= Seq(
         "org.scala-js" %%% "scala-js-macrotask-executor" % "1.0.0",
-        "com.raquo"    %%% "laminar" % "0.14.2"
+        "com.raquo"    %%% "laminar" % "0.14.2",
+        ("org.scala-js" %%% "scalajs-java-securerandom" % "1.0.0").cross(CrossVersion.for3Use2_13)
       ),
       Compile / npmDependencies ++= Seq(
         "bn.js" -> "5.2.0",

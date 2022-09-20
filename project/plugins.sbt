@@ -18,5 +18,6 @@ addSbtPlugin("ch.epfl.scala"                     % "sbt-scalajs-bundler"        
 
 libraryDependencies ++= Seq(
   "org.snakeyaml" % "snakeyaml-engine" % "2.3",
-  "org.scala-js" %% "scalajs-env-jsdom-nodejs" % "1.1.0"
+  "org.scala-js" %% "scalajs-env-jsdom-nodejs" % "1.1.0",
+  "org.scala-js" %% "scalajs-env-selenium" % "1.1.1"
 )
